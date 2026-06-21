@@ -1,0 +1,33 @@
+<!-- @dsCard group="Components" viewport="700x440" name="Cards" subtitle="Service, portfolio & testimonial cards" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{ margin:0; padding:28px; background:var(--surface-page); }
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { ServiceCard, PortfolioCard, TestimonialCard } = window.DesignSystem_7a6364;
+  const Code = () => <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>;
+  function Demo(){
+    return (
+      <div className="grid">
+        <ServiceCard number="01" icon={<Code/>} title="Programação" description="Sites, sistemas e landing pages que carregam rápido e convertem." />
+        <PortfolioCard image="../../assets/cases/case-1.png" category="Tráfego Pago" title="Loja XYZ" description="E-commerce de moda" metric="+312% ROAS" />
+        <TestimonialCard rating={5} quote="A duPolvo abraçou o projeto inteiro. Saímos do zero a 6 dígitos." name="Marina Castro" role="CEO, Studio Lume" avatar="../../assets/avatars/a1.png" />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script>
+</body>
+</html>

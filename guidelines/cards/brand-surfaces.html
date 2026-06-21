@@ -1,0 +1,19 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Surfaces & Glow" subtitle="Dark navy sections + aqua glow treatment" -->
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8" /><link rel="stylesheet" href="../../styles.css" />
+<style>
+  body{ margin:0; padding:24px; background:var(--surface-page); font-family:var(--font-ui); display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .tile{ height:150px; border-radius:var(--radius-lg); display:flex; flex-direction:column; justify-content:flex-end; padding:16px; color:#fff; position:relative; overflow:hidden; }
+  .t1{ background:var(--surface-dark); }
+  .t1::after{ content:""; position:absolute; top:-40px; right:-40px; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle, rgba(33,227,195,.5), transparent 70%); }
+  .t2{ background:linear-gradient(135deg, var(--navy-700), var(--navy-900)); }
+  .t3{ background:var(--aqua-500); color:var(--navy-900); }
+  .name{ font-weight:700; font-size:13px; position:relative; }
+  .sub{ font-size:10px; opacity:.75; font-weight:600; position:relative; }
+  .t3 .sub{ opacity:.65; }
+</style></head>
+<body>
+  <div class="tile t1"><span class="name">Dark + Glow</span><span class="sub">surface-dark · glow-aqua</span></div>
+  <div class="tile t2"><span class="name">Navy gradient</span><span class="sub">navy-700 → navy-900</span></div>
+  <div class="tile t3"><span class="name">Aqua block</span><span class="sub">aqua-500 · texto navy-900</span></div>
+</body></html>

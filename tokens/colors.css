@@ -1,0 +1,96 @@
+/* ===========================================================================
+   duPolvo — Color System
+   Base palette: navy (authority) · aqua (energy) · near-white · near-black
+   =========================================================================== */
+:root {
+  /* --- Brand: Navy (primary / authority) ---------------------------------- */
+  --navy-900: #0F1A30;
+  --navy-800: #16263F;
+  --navy-700: #1C3052;
+  --navy-600: #243B67; /* core primary */
+  --navy-500: #2F4C82;
+  --navy-400: #4A669C;
+  --navy-300: #7B91BA;
+  --navy-200: #B3C0D8;
+  --navy-100: #DCE3F0;
+  --navy-50:  #EEF2F9;
+
+  /* --- Brand: Aqua (accent / energy) -------------------------------------- */
+  --aqua-700: #0E9C86;
+  --aqua-600: #14C0A6;
+  --aqua-500: #21E3C3; /* core accent */
+  --aqua-400: #4DEAD0;
+  --aqua-300: #82F1DF;
+  --aqua-200: #B4F7ED;
+  --aqua-100: #DCFBF6;
+  --aqua-50:  #EFFEFB;
+
+  /* --- Neutrals (near-white → near-black) --------------------------------- */
+  --ink-900: #0D0D0D; /* core text / near-black */
+  --ink-800: #1A1B1E;
+  --ink-700: #2C2E33;
+  --ink-600: #45484F;
+  --ink-500: #62656D;
+  --ink-400: #888B93;
+  --ink-300: #B6B9C2;
+  --ink-200: #D7D9E2;
+  --ink-100: #EBECF3;
+  --paper:   #F5F5FD; /* near-white surface */
+  --white:   #FFFFFF;
+
+  /* --- Semantic / support ------------------------------------------------- */
+  --success: #1FB573;
+  --success-bg: #E4F7EE;
+  --warning: #F0A93C;
+  --warning-bg: #FCF1DF;
+  --danger:  #E5484D;
+  --danger-bg: #FBE7E8;
+  --info: var(--navy-600);
+
+  /* ===== Semantic aliases (use these in components) ====================== */
+  /* Surfaces */
+  --surface-page:    var(--paper);
+  --surface-card:    var(--white);
+  --surface-sunken:  var(--navy-50);
+  --surface-dark:    var(--navy-900);
+  --surface-dark-2:  var(--navy-800);
+  --surface-inverse: var(--ink-900);
+
+  /* Text */
+  --text-strong:   var(--ink-900);
+  --text-body:     var(--ink-700);
+  --text-muted:    var(--ink-500);
+  --text-faint:    var(--ink-400);
+  --text-on-dark:  var(--paper);
+  --text-on-dark-muted: var(--navy-200);
+  --text-on-accent: var(--navy-900);
+  --text-accent:   var(--aqua-700);
+  --text-brand:    var(--navy-600);
+
+  /* Primary action */
+  --action-primary:        var(--navy-600);
+  --action-primary-hover:  var(--navy-700);
+  --action-primary-active: var(--navy-800);
+  --action-primary-text:   var(--paper);
+
+  /* Accent action */
+  --action-accent:        var(--aqua-500);
+  --action-accent-hover:  var(--aqua-600);
+  --action-accent-active: var(--aqua-700);
+  --action-accent-text:   var(--navy-900);
+
+  /* Borders & lines */
+  --border-subtle: var(--ink-100);
+  --border-default: var(--ink-200);
+  --border-strong: var(--ink-300);
+  --border-dark:   var(--navy-700);
+  --border-accent: var(--aqua-500);
+
+  /* Focus ring */
+  --focus-ring: var(--aqua-500);
+  --focus-ring-offset: var(--paper);
+
+  /* Glow (accent halos used on dark sections) */
+  --glow-aqua: 0 0 0 1px rgba(33,227,195,.35), 0 0 48px rgba(33,227,195,.45);
+  --glow-aqua-soft: 0 0 80px rgba(33,227,195,.30);
+}

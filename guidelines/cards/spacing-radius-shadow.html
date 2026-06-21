@@ -1,0 +1,34 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Radius & Shadows" subtitle="Corner radii + elevation system" -->
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8" /><link rel="stylesheet" href="../../styles.css" />
+<style>
+  body{ margin:0; padding:26px 30px; background:var(--surface-page); font-family:var(--font-ui); display:flex; gap:40px; }
+  .group{ display:flex; gap:16px; }
+  .ri{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .rbox{ width:58px; height:58px; background:var(--navy-600); }
+  .sbox{ width:74px; height:58px; background:var(--white); border-radius:var(--radius-md); }
+  .lbl{ font-size:10px; font-weight:700; color:var(--text-strong); }
+  .sub{ font-size:9px; color:var(--text-muted); font-weight:600; }
+  h4{ font-size:11px; letter-spacing:.04em; color:var(--text-muted); margin:0 0 14px; }
+</style></head>
+<body>
+  <div>
+    <h4>BORDER RADIUS</h4>
+    <div class="group">
+      <div class="ri"><div class="rbox" style="border-radius:var(--radius-xs)"></div><span class="lbl">xs</span><span class="sub">6</span></div>
+      <div class="ri"><div class="rbox" style="border-radius:var(--radius-sm)"></div><span class="lbl">sm</span><span class="sub">10</span></div>
+      <div class="ri"><div class="rbox" style="border-radius:var(--radius-md)"></div><span class="lbl">md</span><span class="sub">16</span></div>
+      <div class="ri"><div class="rbox" style="border-radius:var(--radius-lg)"></div><span class="lbl">lg</span><span class="sub">24</span></div>
+      <div class="ri"><div class="rbox" style="border-radius:var(--radius-pill)"></div><span class="lbl">pill</span><span class="sub">999</span></div>
+    </div>
+  </div>
+  <div>
+    <h4>SHADOWS</h4>
+    <div class="group">
+      <div class="ri"><div class="sbox" style="box-shadow:var(--shadow-sm)"></div><span class="lbl">sm</span></div>
+      <div class="ri"><div class="sbox" style="box-shadow:var(--shadow-md)"></div><span class="lbl">md</span></div>
+      <div class="ri"><div class="sbox" style="box-shadow:var(--shadow-lg)"></div><span class="lbl">lg</span></div>
+      <div class="ri"><div class="sbox" style="box-shadow:var(--shadow-accent)"></div><span class="lbl">accent</span></div>
+    </div>
+  </div>
+</body></html>

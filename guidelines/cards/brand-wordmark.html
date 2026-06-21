@@ -1,0 +1,31 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Wordmark" subtitle="duPolvo logotype — light & dark lockups" -->
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8" /><link rel="stylesheet" href="../../styles.css" />
+<style>
+  body{ margin:0; padding:0; background:var(--surface-page); font-family:var(--font-display); display:grid; grid-template-columns:1fr 1fr; height:200px; }
+  .panel{ display:flex; align-items:center; justify-content:center; gap:14px; }
+  .light{ background:var(--paper); }
+  .dark{ background:var(--surface-dark); }
+  .mark{ font-weight:800; font-size:46px; letter-spacing:-.04em; }
+  .mark .du{ color:var(--navy-600); }
+  .mark .polvo{ color:var(--aqua-600); }
+  .dark .mark .du{ color:var(--paper); }
+  .dark .mark .polvo{ color:var(--aqua-500); }
+  .dot{ width:12px; height:12px; border-radius:50%; background:var(--aqua-500); display:inline-block; box-shadow:0 0 16px var(--aqua-500); }
+  .tag{ font-family:var(--font-ui); font-weight:700; font-size:10px; letter-spacing:.18em; text-transform:uppercase; }
+  .light .tag{ color:var(--text-muted); } .dark .tag{ color:var(--navy-200); }
+</style></head>
+<body>
+  <div class="panel light">
+    <div style="text-align:center">
+      <div class="mark"><span class="du">du</span><span class="polvo">Polvo</span></div>
+      <div class="tag">agência criativa</div>
+    </div>
+  </div>
+  <div class="panel dark">
+    <div style="text-align:center">
+      <div class="mark"><span class="du">du</span><span class="polvo">Polvo</span><span class="dot"></span></div>
+      <div class="tag">agência criativa</div>
+    </div>
+  </div>
+</body></html>
