@@ -136,7 +136,6 @@ function FinalCta(){
       <div className="container">
         <div className="cta reveal">
           <div className="cta__glow"></div>
-          <img className="cta__polvo" src="../../assets/polvo.png" alt="" width="240" height="240" loading="lazy"/>
           <h2>Bora dar oito braços pro seu marketing?</h2>
           <p>Conta o que você precisa. A gente responde em até 24h úteis com um caminho — sem compromisso e sem robô do outro lado.</p>
           <div className="cta__btns">
@@ -156,7 +155,7 @@ function Footer(){
       <div className="container">
         <div className="footer__top">
           <div className="footer__brand">
-            <a className="brand" href="#top">du<span className="p">Polvo</span><span className="brand__dot"></span></a>
+            <a className="brand" href="#top"><span>du<span className="p">Polvo</span></span><span className="brand__dot"></span></a>
             <p>Agência criativa e ousada. Programação, design, vídeo e tráfego pago — todos os braços do seu marketing num lugar só.</p>
             <div className="footer__social">
               <a href="#" aria-label="Instagram">{Icons.ig}</a>
@@ -193,14 +192,17 @@ function Footer(){
 }
 
 /* ----- APP --------------------------------------------------------------- */
-const { Nav, Hero, Services, Why, useReveal } = window.duPolvoTop;
+const { Nav, Hero, Services, Why, useReveal, QuoteModal } = window.duPolvoTop;
 function App(){
   useReveal();
+  const [modalOpen, setModalOpen] = useStateB(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
   return (
     <React.Fragment>
-      <Nav/>
+      <Nav onOpenModal={openModal}/>
       <main>
-        <Hero/>
+        <Hero onOpenModal={openModal}/>
         <Services/>
         <Why/>
         <Cases/>
@@ -210,6 +212,7 @@ function App(){
         <FinalCta/>
       </main>
       <Footer/>
+      <QuoteModal open={modalOpen} onClose={closeModal}/>
     </React.Fragment>
   );
 }

@@ -67,8 +67,107 @@ function Counter({value, prefix="", suffix="", decimals=0}){
   return <span ref={ref} className="stat__v">{prefix}{disp}<b>{suffix}</b></span>;
 }
 
+/* ----- QUOTE MODAL ------------------------------------------------------- */
+function QuoteModal({ open, onClose }){
+  const dialogRef = useRef(null);
+  const [form, setForm] = useState({ nome:"", email:"", whatsapp:"" });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  /* reset ao abrir */
+  useEffect(()=>{
+    if(open){ setForm({ nome:"", email:"", whatsapp:"" }); setSubmitted(false); setErrors({}); }
+  },[open]);
+
+  /* focus trap + Esc */
+  useEffect(()=>{
+    if(!open) return;
+    const dialog = dialogRef.current;
+    const focusable = dialog.querySelectorAll('button,input,[tabindex]:not([tabindex="-1"])');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first && first.focus();
+    const onKey = (e) => {
+      if(e.key === "Escape"){ onClose(); return; }
+      if(e.key !== "Tab") return;
+      if(e.shiftKey){ if(document.activeElement === first){ e.preventDefault(); last.focus(); } }
+      else { if(document.activeElement === last){ e.preventDefault(); first.focus(); } }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  },[open, onClose]);
+
+  if(!open) return null;
+
+  const validate = () => {
+    const e = {};
+    if(!form.nome.trim()) e.nome = "Nome obrigatório";
+    if(!form.email.trim()) e.email = "E-mail obrigatório";
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "E-mail inválido";
+    if(!form.whatsapp.trim()) e.whatsapp = "WhatsApp obrigatório";
+    return e;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const e2 = validate();
+    if(Object.keys(e2).length){ setErrors(e2); return; }
+    setSubmitted(true);
+  };
+
+  const set = (field) => (e) => {
+    setForm(f => ({ ...f, [field]: e.target.value }));
+    if(errors[field]) setErrors(er => ({ ...er, [field]: undefined }));
+  };
+
+  return (
+    <div className="modal-overlay" onClick={(e)=>{ if(e.target === e.currentTarget) onClose(); }} role="presentation">
+      <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" ref={dialogRef}>
+        <button className="modal__close" onClick={onClose} aria-label="Fechar modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        {submitted ? (
+          <div className="modal__success">
+            <div className="modal__success-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <h2 id="modal-title">Recebemos sua solicitação!</h2>
+            <p>Entraremos em contato em breve.</p>
+            <button className="btn btn--accent btn--block" onClick={onClose}>Fechar</button>
+          </div>
+        ) : (
+          <>
+            <div className="modal__head">
+              <h2 id="modal-title" className="modal__title">Bora conversar?</h2>
+              <p className="modal__sub">Preencha abaixo e a gente entra em contato em até 24h.</p>
+            </div>
+            <form className="modal__form" onSubmit={handleSubmit} noValidate>
+              <div className="modal__field">
+                <label htmlFor="mf-nome">Nome</label>
+                <input id="mf-nome" type="text" placeholder="Seu nome completo" value={form.nome} onChange={set("nome")} required autoComplete="name"/>
+                {errors.nome && <span className="modal__error">{errors.nome}</span>}
+              </div>
+              <div className="modal__field">
+                <label htmlFor="mf-email">E-mail</label>
+                <input id="mf-email" type="email" placeholder="seu@email.com" value={form.email} onChange={set("email")} required autoComplete="email"/>
+                {errors.email && <span className="modal__error">{errors.email}</span>}
+              </div>
+              <div className="modal__field">
+                <label htmlFor="mf-wa">WhatsApp</label>
+                <input id="mf-wa" type="tel" placeholder="(00) 00000-0000" value={form.whatsapp} onChange={set("whatsapp")} required autoComplete="tel"/>
+                {errors.whatsapp && <span className="modal__error">{errors.whatsapp}</span>}
+              </div>
+              <button type="submit" className="btn btn--accent btn--block" style={{marginTop:"var(--space-2)"}}>Enviar solicitação</button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /* ----- NAV --------------------------------------------------------------- */
-function Nav(){
+function Nav({ onOpenModal }){
   const [s,setS]=useState(false);
   useEffect(()=>{ const f=()=>setS(window.scrollY>24); f(); window.addEventListener("scroll",f,{passive:true}); return ()=>window.removeEventListener("scroll",f); },[]);
   return (
@@ -80,7 +179,7 @@ function Nav(){
           <a className="nav__link" href="#cases">Cases</a>
           <a className="nav__link" href="#processo">Processo</a>
           <a className="nav__link" href="#faq">FAQ</a>
-          <a className="btn btn--accent btn--sm" href="#contato">Solicitar orçamento</a>
+          <button className="btn btn--accent btn--sm" type="button" onClick={onOpenModal}>Solicitar orçamento</button>
         </nav>
         <button className="nav__burger" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
@@ -89,7 +188,7 @@ function Nav(){
 }
 
 /* ----- HERO -------------------------------------------------------------- */
-function Hero(){
+function Hero({ onOpenModal }){
   return (
     <section className="hero" id="top">
       <div className="hero__bg">
@@ -103,7 +202,7 @@ function Hero(){
           <h1 className="hero__title reveal d1">Sua marca tem muitos braços.<br/>A gente cuida de <em>todos</em>.</h1>
           <p className="hero__sub reveal d2">Programação, design, vídeo e tráfego pago sob o mesmo teto. Um time que abraça seu projeto inteiro — e puxa todos os tentáculos pro mesmo lugar: você vendendo mais.</p>
           <div className="hero__cta reveal d3">
-            <a className="btn btn--accent btn--lg" href="#contato">Solicitar orçamento {I.arrow}</a>
+            <button className="btn btn--accent btn--lg" type="button" onClick={onOpenModal}>Solicitar orçamento {I.arrow}</button>
             <a className="btn btn--outline btn--lg on-dark" href="#cases">Ver cases</a>
           </div>
           <div className="hero__trust reveal d4">
@@ -197,4 +296,4 @@ function Why(){
   );
 }
 
-window.duPolvoTop = { Nav, Hero, Services, Why, Counter, useReveal, I };
+window.duPolvoTop = { Nav, Hero, Services, Why, Counter, useReveal, I, QuoteModal };
